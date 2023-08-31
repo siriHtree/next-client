@@ -1,12 +1,15 @@
 "use client";
 
+
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LinkedInLogin from "./LinkedInLogin";
 
 const Navbar = () => {
 	const pathname = usePathname();
 	return (
-		<nav className="w-full h-[10vh] fixed px-8 flex items-center">
+		<nav className="w-full h-[10vh] fixed px-24 flex items-center justify-between">
 			<div id="nLinks">
 				<Link
 					href="/"
@@ -29,6 +32,7 @@ const Navbar = () => {
 					Stripe payment
 				</Link>
 			</div>
+			<LinkedInLogin></LinkedInLogin>
 		</nav>
 	);
 };
