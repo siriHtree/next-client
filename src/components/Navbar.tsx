@@ -31,6 +31,16 @@ const Navbar = () => {
 				>
 					Stripe payment
 				</Link>
+				<Link
+					href="/random"
+					className={`${
+						pathname === "/random"
+							? "text-blue-700 font-bold"
+							: "text-black"
+					} no-underline cursor-pointer font-medium text-xl ml-8`}
+				>
+					Random
+				</Link>
 			</div>
 			<LinkedInLogin></LinkedInLogin>
 		</nav>

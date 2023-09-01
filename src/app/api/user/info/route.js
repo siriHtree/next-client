@@ -20,10 +20,10 @@ export async function POST(req){
         })
 
     }catch(err){
+
         return NextResponse.json({
             success:false,
-            message:err.response.data.error,
-            detail:err.response.data.error_description
+            message:err.response.data.message,
         })
 
     }

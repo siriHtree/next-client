@@ -11,6 +11,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { ContactsOutlined } from "@mui/icons-material";
 
 interface USERDATA {
 	name: string;
@@ -51,10 +52,12 @@ const LinkedInLogin = () => {
 				code: searchParams.get("code"),
 			});
 			console.log(res);
-			localStorage.setItem(
-				"linkedin-tokens",
-				JSON.stringify(res.data.data),
-			);
+			if (localStorage.getItem("linkedin-tokens") === null) {
+				localStorage.setItem(
+					"linkedin-tokens",
+					JSON.stringify(res.data.data),
+				);
+			}
 		} catch (err) {
 			console.log(err);
 		}
@@ -65,6 +68,7 @@ const LinkedInLogin = () => {
 			let res = await axios.post("/api/user/info", {
 				token: data.access_token,
 			});
+			console.log(res);
 			let tmp = {
 				name: res.data.data.name,
 				email: res.data.data.email,
@@ -79,25 +83,24 @@ const LinkedInLogin = () => {
 	};
 
 	useEffect(() => {
-		console.log(searchParams.get("code"));
 		if (
 			searchParams.get("code") &&
 			localStorage.getItem("linkedin-tokens") == undefined
 		) {
 			getAccessToken();
 			setIsAuthenticated(true);
-		} else if (localStorage.getItem("linkedin-tokens") !== undefined) {
+			console.log("code is generated");
+		} else if (localStorage.getItem("linkedin-tokens") !== null) {
 			getUserInfo();
 			setIsAuthenticated(true);
-			console.log("ehho");
+			console.log("access token is stored in localstorage");
 		}
-		console.log(isAuthenticated);
 	}, [isAuthenticated]);
 	return (
 		<div>
 			{!isAuthenticated ? (
 				<a
-					href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78tizxtpgb5v5y&redirect_uri=http://localhost:3000&scope=openid%20profile%20email&state=Madjfdifdl"
+					href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78tizxtpgb5v5y&redirect_uri=http://localhost:3000&scope=openid%20profile%20email&state=lskdjfies"
 					target="_blank"
 				>
 					<Button
