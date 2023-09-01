@@ -81,6 +81,14 @@ const LinkedInLogin = () => {
 		localStorage.clear();
 		setIsAuthenticated(false);
 	};
+	const authHandler = async () => {
+		try {
+			let res = await axios.get("/api/user/url");
+			console.log(res);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	useEffect(() => {
 		if (
@@ -99,18 +107,14 @@ const LinkedInLogin = () => {
 	return (
 		<div>
 			{!isAuthenticated ? (
-				<a
-					href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78tizxtpgb5v5y&redirect_uri=http://localhost:3000&scope=openid%20profile%20email&state=lskdjfies"
-					target="_blank"
+				<Button
+					variant="contained"
+					size="large"
+					startIcon={<LinkedInIcon />}
+					onClick={authHandler}
 				>
-					<Button
-						variant="contained"
-						size="large"
-						startIcon={<LinkedInIcon />}
-					>
-						Login
-					</Button>
-				</a>
+					Login
+				</Button>
 			) : userDetails !== null ? (
 				userDetails.picture ? (
 					<div className="flex items-center">
